@@ -14,3 +14,6 @@ See `PROJECT_RULES.md` for folder ownership and collaboration rules.
 
 ## Important
 This ZIP contains folders and starter documentation only. It does not contain an implemented application, dependencies, credentials, or configured services. Adapt the structure to your existing technology stack before development.
+
+# SahAI-Coop
+AI-powered multilingual chatbot that helps farmers and cooperative society members access government schemes, cooperative laws, member rights, agricultural insurance, and grievance guidance in simple language
