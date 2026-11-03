@@ -1,0 +1,10 @@
+# Replace the placeholders with your GitHub usernames.
+# Example: /frontend/ @frontend-member
+/frontend/ @frontend-member
+/backend/ @backend-member
+/database/ @backend-member
+/ai-engine/ @ai-member
+/shared/ @repository-admin
+/.github/ @repository-admin
+/PROJECT_RULES.md @repository-admin
+/docker-compose.yml @repository-admin
