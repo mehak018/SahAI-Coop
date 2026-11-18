@@ -1,3 +1,4 @@
+import ssl
 from typing import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
@@ -13,6 +14,11 @@ engine_kwargs = {
 if settings.DATABASE_URL.startswith("sqlite"):
     connect_args["check_same_thread"] = False
 else:
+    # If connecting to remote cloud database (TiDB, Aiven, AWS RDS) or ssl is specified
+    db_url_lower = settings.DATABASE_URL.lower()
+    if any(k in db_url_lower for k in ["tidbcloud", "aivencloud", "amazonaws", "ssl"]):
+        connect_args["ssl"] = ssl.create_default_context()
+
     engine_kwargs.update({
         "pool_recycle": 3600,
         "pool_size": 10,

@@ -132,12 +132,19 @@ def init_database(seed: bool = True, drop_existing: bool = False):
     """Initializes the database schema and seeds."""
     db_url = os.getenv("DATABASE_URL", "mysql+pymysql://root:@localhost:3306/sahai_coop_db")
     config = parse_db_url(db_url)
+
+    # Automatically enable SSL for remote cloud databases (e.g. TiDB Cloud, Aiven)
+    import ssl
+    ssl_context = None
+    if config["host"] not in ("localhost", "127.0.0.1") or "ssl" in db_url.lower():
+        ssl_context = ssl.create_default_context()
     
     print("=" * 60)
     print("SahAI-Coop Database Initializer")
     print(f"Host:     {config['host']}:{config['port']}")
     print(f"User:     {config['user']}")
     print(f"Database: {config['database']}")
+    print(f"SSL:      {'Enabled' if ssl_context else 'Disabled'}")
     print("=" * 60)
 
     # 1. Connect to MySQL server (without specifying DB to allow creating it)
@@ -148,6 +155,7 @@ def init_database(seed: bool = True, drop_existing: bool = False):
             user=config["user"],
             password=config["password"],
             charset="utf8mb4",
+            ssl=ssl_context,
             autocommit=True
         )
         print("Connected to MySQL server.")
@@ -178,6 +186,7 @@ def init_database(seed: bool = True, drop_existing: bool = False):
             password=config["password"],
             database=config["database"],
             charset="utf8mb4",
+            ssl=ssl_context,
             autocommit=False
         )
     except Exception as e:
