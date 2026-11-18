@@ -11,11 +11,16 @@ engine_kwargs = {
     "pool_pre_ping": True,
 }
 
-if settings.DATABASE_URL.startswith("sqlite"):
+# Auto-normalize mysql:// to mysql+pymysql:// if dialect is omitted
+db_url = settings.DATABASE_URL
+if db_url.startswith("mysql://"):
+    db_url = db_url.replace("mysql://", "mysql+pymysql://", 1)
+
+if db_url.startswith("sqlite"):
     connect_args["check_same_thread"] = False
 else:
     # If connecting to remote cloud database (TiDB, Aiven, AWS RDS) or ssl is specified
-    db_url_lower = settings.DATABASE_URL.lower()
+    db_url_lower = db_url.lower()
     if any(k in db_url_lower for k in ["tidbcloud", "aivencloud", "amazonaws", "ssl"]):
         connect_args["ssl"] = ssl.create_default_context()
 
@@ -26,7 +31,7 @@ else:
     })
 
 engine = create_engine(
-    settings.DATABASE_URL,
+    db_url,
     connect_args=connect_args,
     **engine_kwargs
 )
