@@ -1,0 +1,15 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/auth", "destination": "/auth.html" },
+    { "source": "/chat", "destination": "/chat.html" },
+    { "source": "/frontend", "destination": "/index.html" },
+    { "source": "/frontend/", "destination": "/index.html" },
+    { "source": "/frontend/index.html", "destination": "/index.html" },
+    { "source": "/frontend/auth.html", "destination": "/auth.html" },
+    { "source": "/frontend/auth", "destination": "/auth.html" },
+    { "source": "/frontend/chat.html", "destination": "/chat.html" },
+    { "source": "/frontend/chat", "destination": "/chat.html" }
+  ]
+}

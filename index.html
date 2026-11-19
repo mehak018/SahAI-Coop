@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SahAI-Coop — Home</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* =====================================================
+       PAGE-SPECIFIC STYLES — index.html
+       ===================================================== */
+
+    /* ---- Animated gradient background ---- */
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33%       { transform: translateY(-18px) rotate(2deg); }
+      66%       { transform: translateY(-8px) rotate(-1deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+      50%       { box-shadow: 0 0 0 12px rgba(76, 175, 80, 0); }
+    }
+
+    @keyframes particleDrift {
+      0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0.6; }
+      25%  { transform: translateY(-30px) translateX(15px) scale(1.1); opacity: 0.9; }
+      50%  { transform: translateY(-55px) translateX(-10px) scale(0.9); opacity: 0.7; }
+      75%  { transform: translateY(-25px) translateX(20px) scale(1.05); opacity: 0.85; }
+      100% { transform: translateY(0) translateX(0) scale(1);   opacity: 0.6; }
+    }
+
+    @keyframes typing {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Section entrance ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       NAV HEADER
+       ============================================================ */
+    .nav-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 68px;
+      background: rgba(15, 31, 23, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(76, 175, 80, 0.15);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      filter: drop-shadow(0 0 8px rgba(76,175,80,0.6));
+    }
+    .nav-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #81C784, #4CAF50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-link {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .nav-link:hover {
+      color: var(--color-text);
+      background: rgba(76,175,80,0.1);
+    }
+    .nav-link.active {
+      color: #81C784;
+      background: rgba(76,175,80,0.14);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem 0.35rem 0.5rem;
+      background: rgba(76,175,80,0.12);
+      border: 1px solid rgba(76,175,80,0.25);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+    .user-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .btn-logout {
+      padding: 0.38rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid rgba(76,175,80,0.3);
+      background: transparent;
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover {
+      background: rgba(220,53,69,0.15);
+      border-color: rgba(220,53,69,0.4);
+      color: #ef9a9a;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.4rem;
+      border-radius: 8px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-text-muted);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav dropdown */
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: rgba(15,31,23,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(76,175,80,0.15);
+      padding: 0.75rem 1.5rem 1rem;
+      animation: slideDown 0.25s ease;
+      z-index: 998;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav .nav-link {
+      display: block;
+      padding: 0.6rem 0.75rem;
+      font-size: 1rem;
+    }
+    .mobile-nav .mobile-user-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.75rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(76,175,80,0.1);
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(
+        135deg,
+        #0a1a0f 0%,
+        #0F1F17 25%,
+        #1B4D3E 55%,
+        #0D2B22 75%,
+        #0a1a0f 100%
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+    }
+
+    /* Particle canvas */
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow blobs */
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-glow-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(46,125,50,0.35) 0%, transparent 70%);
+      top: -100px; left: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-glow-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(76,175,80,0.2) 0%, transparent 70%);
+      bottom: -50px; right: 10%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    .hero-glow-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(249,168,37,0.12) 0%, transparent 70%);
+      top: 40%; left: 50%;
+      animation: float 14s ease-in-out infinite;
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Left content */
+    .hero-content { }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: rgba(249,168,37,0.12);
+      border: 1px solid rgba(249,168,37,0.3);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #F9A825;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.1s;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--color-text);
+      margin-bottom: 1.25rem;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.2s;
+    }
+    .hero-title .highlight {
+      display: inline;
+      background: linear-gradient(135deg, #66BB6A, #81C784, #4CAF50, #F9A825);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 520px;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.3s;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.4s;
+    }
+
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(76,175,80,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulseBorder 2.5s ease infinite;
+    }
+    .btn-hero-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 36px rgba(76,175,80,0.55);
+    }
+
+    .btn-hero-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: rgba(76,175,80,0.08);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 100px;
+      border: 1px solid rgba(76,175,80,0.3);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-hero-ghost:hover {
+      background: rgba(76,175,80,0.14);
+      color: var(--color-text);
+      border-color: rgba(76,175,80,0.5);
+      transform: translateY(-2px);
+    }
+
+    .lang-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.5s;
+    }
+    .lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      font-size: 0.84rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .lang-badge:hover {
+      background: rgba(76,175,80,0.16);
+      border-color: rgba(76,175,80,0.45);
+      color: #e8f5e9;
+      transform: translateY(-1px);
+    }
+    .lang-badge.active {
+      background: rgba(76,175,80,0.25);
+      border-color: #66BB6A;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(76,175,80,0.28);
+    }
+
+    /* Right side — chat window illustration */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeInRight 0.8s ease both;
+      animation-delay: 0.3s;
+    }
+
+    .chat-mockup {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(27,77,62,0.35);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(76,175,80,0.2);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+      overflow: hidden;
+      animation: float 7s ease-in-out infinite;
+    }
+    .chat-mockup-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 1.25rem;
+      background: rgba(0,0,0,0.25);
+      border-bottom: 1px solid rgba(76,175,80,0.12);
+    }
+    .chat-mockup-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .chat-mockup-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .chat-mockup-dots span:nth-child(1) { background: #ef5350; }
+    .chat-mockup-dots span:nth-child(2) { background: #FFA726; }
+    .chat-mockup-dots span:nth-child(3) { background: #66BB6A; }
+    .chat-mockup-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-left: 0.3rem;
+    }
+    .chat-mockup-status {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: #66BB6A;
+    }
+    .chat-mockup-status::before {
+      content: '';
+      display: block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4CAF50;
+      animation: pulseBorder 2s ease infinite;
+    }
+
+    .chat-mockup-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 300px;
+    }
+
+    .chat-bubble {
+      max-width: 85%;
+      padding: 0.7rem 1rem;
+      border-radius: 16px;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      position: relative;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #2E7D32, #388E3C);
+      color: #E8F5E9;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(76,175,80,0.15);
+      color: var(--color-text-muted);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-bubble.bot .source-tag {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.15rem 0.5rem;
+      background: rgba(76,175,80,0.15);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: #81C784;
+    }
+    .chat-typing {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 0.6rem 0.9rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(76,175,80,0.1);
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      width: fit-content;
+    }
+    .chat-typing span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4CAF50;
+      animation: typing 1.4s ease infinite;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    .chat-mockup-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.25rem;
+      border-top: 1px solid rgba(76,175,80,0.1);
+      background: rgba(0,0,0,0.15);
+    }
+    .chat-input-mock {
+      flex: 1;
+      height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(76,175,80,0.2);
+      border-radius: 100px;
+      padding: 0 1rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+    }
+    .chat-send-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(76,175,80,0.4);
+    }
+    .chat-send-btn svg {
+      width: 16px; height: 16px;
+      fill: white;
+    }
+
+    /* ============================================================
+       HOW IT WORKS
+       ============================================================ */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-full {
+      padding: 5rem 2rem;
+      background: rgba(255,255,255,0.015);
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #4CAF50;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.6rem;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 3rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 2rem 1.5rem 1.75rem;
+      background: rgba(27,77,62,0.3);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(76,175,80,0.15);
+      border-radius: 20px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      overflow: hidden;
+    }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(76,175,80,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .step-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(76,175,80,0.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(76,175,80,0.15);
+    }
+    .step-card:hover::before { opacity: 1; }
+
+    .step-number {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: white;
+    }
+    .step-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+      margin-top: 0.75rem;
+    }
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 0.87rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Connector line between steps */
+    .steps-grid .step-card:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(76,175,80,0.4);
+      font-size: 1.2rem;
+      z-index: 2;
+    }
+
+    /* ============================================================
+       TOPIC CARDS
+       ============================================================ */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .topic-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.75rem;
+      background: rgba(27,77,62,0.28);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(76,175,80,0.14);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: inherit;
+    }
+    .topic-card:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+    }
+    .topic-card:hover::before { opacity: 1; }
+
+    /* Color variants */
+    .topic-card[data-color="green"]:hover      { border-color: rgba(76,175,80,0.5); box-shadow: 0 16px 50px rgba(76,175,80,0.2); }
+    .topic-card[data-color="blue-green"]:hover { border-color: rgba(38,166,154,0.5); box-shadow: 0 16px 50px rgba(38,166,154,0.2); }
+    .topic-card[data-color="teal"]:hover       { border-color: rgba(0,188,212,0.5); box-shadow: 0 16px 50px rgba(0,188,212,0.2); }
+    .topic-card[data-color="amber"]:hover      { border-color: rgba(255,167,38,0.5); box-shadow: 0 16px 50px rgba(255,167,38,0.2); }
+    .topic-card[data-color="forest"]:hover     { border-color: rgba(46,125,50,0.5); box-shadow: 0 16px 50px rgba(46,125,50,0.2); }
+    .topic-card[data-color="gold"]:hover       { border-color: rgba(249,168,37,0.5); box-shadow: 0 16px 50px rgba(249,168,37,0.2); }
+
+    .topic-icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.1rem;
+      flex-shrink: 0;
+    }
+    .icon-green      { background: rgba(76,175,80,0.18); }
+    .icon-blue-green { background: rgba(38,166,154,0.18); }
+    .icon-teal       { background: rgba(0,188,212,0.18); }
+    .icon-amber      { background: rgba(255,167,38,0.18); }
+    .icon-forest     { background: rgba(46,125,50,0.18); }
+    .icon-gold       { background: rgba(249,168,37,0.18); }
+
+    .topic-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.4rem;
+    }
+    .topic-desc {
+      font-size: 0.84rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .topic-arrow {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: rgba(76,175,80,0.6);
+      font-weight: 600;
+      transition: color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .topic-card:hover .topic-arrow {
+      color: #4CAF50;
+      transform: translateX(4px);
+    }
+
+    /* ============================================================
+       SOURCES SECTION
+       ============================================================ */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .source-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 1.25rem;
+      background: rgba(27,77,62,0.22);
+      border: 1px solid rgba(76,175,80,0.12);
+      border-radius: 16px;
+      text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .source-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(76,175,80,0.3);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .source-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(76,175,80,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .source-info { flex: 1; min-width: 0; }
+    .source-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.2rem;
+      line-height: 1.4;
+    }
+    .source-org {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+    .source-ext {
+      flex-shrink: 0;
+      color: rgba(76,175,80,0.5);
+      font-size: 0.75rem;
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       DISCLAIMER & FOOTER
+       ============================================================ */
+    .disclaimer-section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .disclaimer-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+      background: rgba(249,168,37,0.07);
+      border: 1px solid rgba(249,168,37,0.25);
+      border-radius: 16px;
+      border-left: 4px solid #F9A825;
+    }
+    .disclaimer-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .disclaimer-text {
+      font-size: 0.88rem;
+      color: rgba(249,168,37,0.85);
+      line-height: 1.65;
+    }
+    .disclaimer-text strong { color: #F9A825; }
+
+    .site-footer {
+      border-top: 1px solid rgba(76,175,80,0.1);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(165,214,167,0.5);
+    }
+    .site-footer a {
+      color: rgba(76,175,80,0.6);
+      text-decoration: none;
+    }
+    .site-footer a:hover { color: #4CAF50; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .steps-grid     { grid-template-columns: repeat(2, 1fr); }
+      .topics-grid    { grid-template-columns: repeat(2, 1fr); }
+      .sources-grid   { grid-template-columns: repeat(2, 1fr); }
+      .step-card::after { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 5rem 1.5rem 3rem;
+      }
+      .hero-visual { order: -1; }
+      .chat-mockup { max-width: 340px; }
+      .nav-links    { display: none; }
+      .nav-right    { display: none; }
+      .hamburger    { display: flex; }
+
+      .steps-grid   { grid-template-columns: 1fr; }
+      .topics-grid  { grid-template-columns: 1fr; }
+      .sources-grid { grid-template-columns: 1fr; }
+
+      .section { padding: 3rem 1.25rem; }
+      .section-full { padding: 3rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVIGATION HEADER
+     ================================================================ -->
+<header class="nav-header" id="main-nav">
+  <!-- Logo -->
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Leaf / plant SVG -->
+      <circle cx="24" cy="24" r="22" fill="rgba(46,125,50,0.15)" stroke="rgba(76,175,80,0.4)" stroke-width="1.5"/>
+      <path d="M24 36 C24 36 10 28 10 18 C10 10 17 6 24 10 C31 6 38 10 38 18 C38 28 24 36 24 36Z"
+            fill="url(#leafGrad)" opacity="0.9"/>
+      <line x1="24" y1="10" x2="24" y2="36" stroke="rgba(129,199,132,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M24 20 Q18 17 15 13" stroke="rgba(129,199,132,0.4)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M24 24 Q30 21 33 17" stroke="rgba(129,199,132,0.4)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <defs>
+        <linearGradient id="leafGrad" x1="10" y1="6" x2="38" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#66BB6A"/>
+          <stop offset="100%" stop-color="#2E7D32"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="nav-logo-text">SahAI-Coop</span>
+  </a>
+
+  <!-- Center nav links (desktop) -->
+  <nav aria-label="Main navigation">
+    <ul class="nav-links" id="desktop-nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="chat.html"  class="nav-link" id="nav-chat-link">Chat</a></li>
+      <li><a href="#sources"   class="nav-link" id="nav-sources-link">Sources</a></li>
+      <li><a href="#"          class="nav-link" data-modal="help" id="nav-help-link">Help</a></li>
+    </ul>
+  </nav>
+
+  <!-- Right: user pill + logout (desktop) -->
+  <div class="nav-right" id="nav-right">
+    <div class="user-pill" id="user-pill">
+      <div class="user-avatar" id="user-avatar">?</div>
+      <span id="user-name-display">Loading…</span>
+    </div>
+    <button class="btn-logout" id="logout-btn">Logout</button>
+  </div>
+
+  <!-- Hamburger (mobile) -->
+  <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile nav dropdown -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link active">Home</a>
+  <a href="chat.html"  class="nav-link">Chat</a>
+  <a href="#sources"   class="nav-link" onclick="closeMobileNav()">Sources</a>
+  <a href="#"          class="nav-link" data-modal="help">Help</a>
+  <div class="mobile-user-row">
+    <div class="user-avatar" id="mobile-user-avatar">?</div>
+    <span id="mobile-user-name" style="font-size:0.85rem;color:var(--color-text-muted);">Loading…</span>
+    <button class="btn-logout" id="mobile-logout-btn" style="margin-left:auto;">Logout</button>
+  </div>
+</nav>
+
+
+<!-- ================================================================
+     HERO SECTION
+     ================================================================ -->
+<section class="hero-section" id="hero">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow hero-glow-3"></div>
+
+  <div class="hero-container">
+    <!-- Left: Content -->
+    <div class="hero-content">
+      <span class="hero-badge">🌾 AI-Powered Cooperative Assistant</span>
+
+      <h1 class="hero-title" id="hero-title">
+        Multilingual Cooperative Governance &amp;
+        <span class="highlight">Legal Assistance</span>
+      </h1>
+
+      <p class="hero-subtitle" id="hero-subtitle">
+        Empowering farmers and cooperative members with AI-powered guidance on
+        PMFBY, PACS services, government schemes, and cooperative law —
+        in English, Hindi &amp; Marathi.
+      </p>
+
+      <div class="hero-cta">
+        <a href="chat.html" class="btn-hero-primary" id="cta-chat">
+          <span id="cta-chat-text">Start Chatting</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="#features" class="btn-hero-ghost" id="cta-learn">
+          <span id="cta-learn-text">Learn More</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <div class="lang-badges" role="group" aria-label="Choose language">
+        <button type="button" class="lang-badge active" data-lang="en">🇬🇧 English</button>
+        <button type="button" class="lang-badge" data-lang="hi">🇮🇳 हिंदी</button>
+        <button type="button" class="lang-badge" data-lang="mr">🇮🇳 मराठी</button>
+      </div>
+    </div>
+
+    <!-- Right: Chat window mockup -->
+    <div class="hero-visual">
+      <div class="chat-mockup">
+        <div class="chat-mockup-header">
+          <div class="chat-mockup-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="chat-mockup-title">SahAI-Coop Assistant</span>
+          <span class="chat-mockup-status">Online</span>
+        </div>
+
+        <div class="chat-mockup-body">
+          <div class="chat-bubble bot">
+            👋 नमस्ते! I'm SahAI-Coop. How can I help you today?
+            <br/><span class="source-tag">🌐 Multilingual</span>
+          </div>
+          <div class="chat-bubble user">
+            मुझे PMFBY के बारे में जानना है।
+          </div>
+          <div class="chat-bubble bot">
+            PMFBY (Pradhan Mantri Fasal Bima Yojana) is a crop insurance scheme. Farmers pay a premium of just <strong>2%</strong> for Kharif crops.
+            <br/><span class="source-tag">📄 PMFBY Guidelines, MoA</span>
+          </div>
+          <div class="chat-bubble user">
+            Which documents do I need?
+          </div>
+          <div class="chat-typing">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="chat-mockup-footer">
+          <div class="chat-input-mock">Ask anything in any language…</div>
+          <div class="chat-send-btn">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     HOW IT WORKS
+     ================================================================ -->
+<section id="features" style="background: rgba(0,0,0,0.2); padding: 5rem 2rem;">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">Process</span>
+      <h2 class="section-title">How SahAI-Coop Works</h2>
+      <p class="section-subtitle">From your question to a verified answer in seconds.</p>
+    </div>
+
+    <div class="steps-grid reveal">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <span class="step-icon">🗣️</span>
+        <div class="step-title">You Ask</div>
+        <p class="step-desc">Type or speak your question in any language — English, Hindi, or Marathi. No technical jargon needed.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <span class="step-icon">🎯</span>
+        <div class="step-title">Topic Identified</div>
+        <p class="step-desc">AI classifies your query to the right governance domain: PMFBY, PACS, Cooperative Law, or Government Schemes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <span class="step-icon">📚</span>
+        <div class="step-title">Answer Retrieved</div>
+        <p class="step-desc">Our knowledge base and official government documents are searched for the most accurate and relevant information.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <span class="step-icon">✅</span>
+        <div class="step-title">Answer + Sources</div>
+        <p class="step-desc">Get a clear, plain-language answer with verified official citations you can trust and reference.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     TOPIC CATEGORY CARDS
+     ================================================================ -->
+<section id="topics" class="section">
+  <div class="reveal">
+    <span class="section-eyebrow">Topics</span>
+    <h2 class="section-title">What can I help you with?</h2>
+    <p class="section-subtitle">Click any topic to start a focused conversation with our AI assistant.</p>
+  </div>
+
+  <div class="topics-grid reveal" id="topics-grid">
+    <!-- Statically rendered; JS may replace with API data -->
+    <div class="topic-card" data-color="green" data-topic="crop_insurance" onclick="goToChat('crop_insurance')">
+      <div class="topic-icon-wrap icon-green">🌾</div>
+      <div class="topic-title">Crop Insurance (PMFBY)</div>
+      <p class="topic-desc">Premium rates, claim process, eligibility, and enrollment for Pradhan Mantri Fasal Bima Yojana.</p>
+      <span class="topic-arrow">Ask about this →</span>
+    </div>
+
+    <div class="topic-card" data-color="blue-green" data-topic="documents" onclick="goToChat('documents')">
+      <div class="topic-icon-wrap icon-blue-green">📄</div>
+      <div class="topic-title">Required Documents</div>
+      <p class="topic-desc">Know exactly which documents are needed for insurance claims, society registration, and government benefits.</p>
+      <span class="topic-arrow">Ask about this →</span>
+    </div>
+
+    <div class="topic-card" data-color="teal" data-topic="pacs" onclick="goToChat('pacs')">
+      <div class="topic-icon-wrap icon-teal">🏦</div>
+      <div class="topic-title">PACS Services</div>
+      <p class="topic-desc">Primary Agricultural Credit Societies — loans, savings, kisan credit cards, and member services explained.</p>
+      <span class="topic-arrow">Ask about this →</span>
+    </div>
+
+    <div class="topic-card" data-color="amber" data-topic="grievance" onclick="goToChat('grievance')">
+      <div class="topic-icon-wrap icon-amber">⚖️</div>
+      <div class="topic-title">Grievance Assistance</div>
+      <p class="topic-desc">File complaints, track grievance status, and understand your rights under cooperative and agricultural law.</p>
+      <span class="topic-arrow">Ask about this →</span>
+    </div>
+
+    <div class="topic-card" data-color="forest" data-topic="cooperative_rules" onclick="goToChat('cooperative_rules')">
+      <div class="topic-icon-wrap icon-forest">📋</div>
+      <div class="topic-title">Cooperative Society Rules</div>
+      <p class="topic-desc">Maharashtra Cooperative Societies Act, member rights, by-laws, meetings, and dispute resolution.</p>
+      <span class="topic-arrow">Ask about this →</span>
+    </div>
+
+    <div class="topic-card" data-color="gold" data-topic="government_schemes" onclick="goToChat('government_schemes')">
+      <div class="topic-icon-wrap icon-gold">🏛️</div>
+      <div class="topic-title">Government Schemes</div>
+      <p class="topic-desc">PM-Kisan, Kisan Credit Card, Soil Health Card, e-NAM, and other central and state agricultural programmes.</p>
+      <span class="topic-arrow">Ask about this →</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     OFFICIAL SOURCES
+     ================================================================ -->
+<section id="sources" style="background: rgba(0,0,0,0.2); padding: 5rem 2rem;">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">References</span>
+      <h2 class="section-title">Official Sources &amp; References</h2>
+      <p class="section-subtitle">Every answer is grounded in authentic government and regulatory documents.</p>
+    </div>
+
+    <div class="sources-grid reveal">
+      <a class="source-card" href="https://pmfby.gov.in" target="_blank" rel="noopener">
+        <div class="source-icon">🌾</div>
+        <div class="source-info">
+          <div class="source-title">PMFBY Guidelines</div>
+          <div class="source-org">Ministry of Agriculture &amp; Farmers' Welfare</div>
+        </div>
+        <span class="source-ext">↗</span>
+      </a>
+
+      <a class="source-card" href="https://maharashtra.gov.in" target="_blank" rel="noopener">
+        <div class="source-icon">⚖️</div>
+        <div class="source-info">
+          <div class="source-title">Maharashtra Cooperative Societies Act, 1960</div>
+          <div class="source-org">Government of Maharashtra</div>
+        </div>
+        <span class="source-ext">↗</span>
+      </a>
+
+      <a class="source-card" href="https://www.nabard.org" target="_blank" rel="noopener">
+        <div class="source-icon">🏦</div>
+        <div class="source-info">
+          <div class="source-title">NABARD Cooperative Finance Guidelines</div>
+          <div class="source-org">National Bank for Agriculture &amp; Rural Development</div>
+        </div>
+        <span class="source-ext">↗</span>
+      </a>
+
+      <a class="source-card" href="https://pmkisan.gov.in" target="_blank" rel="noopener">
+        <div class="source-icon">💰</div>
+        <div class="source-info">
+          <div class="source-title">PM-Kisan Scheme Documentation</div>
+          <div class="source-org">Ministry of Agriculture &amp; Farmers' Welfare</div>
+        </div>
+        <span class="source-ext">↗</span>
+      </a>
+
+      <a class="source-card" href="https://rbi.org.in" target="_blank" rel="noopener">
+        <div class="source-icon">📜</div>
+        <div class="source-info">
+          <div class="source-title">RBI Circular on PACS</div>
+          <div class="source-org">Reserve Bank of India</div>
+        </div>
+        <span class="source-ext">↗</span>
+      </a>
+
+      <a class="source-card" href="https://pgportal.gov.in" target="_blank" rel="noopener">
+        <div class="source-icon">📮</div>
+        <div class="source-info">
+          <div class="source-title">Grievance Redressal Framework</div>
+          <div class="source-org">Department of Administrative Reforms &amp; PG</div>
+        </div>
+        <span class="source-ext">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     DISCLAIMER
+     ================================================================ -->
+<div class="disclaimer-section reveal">
+  <div class="disclaimer-callout">
+    <span class="disclaimer-icon">⚠️</span>
+    <p class="disclaimer-text">
+      <strong>Disclaimer:</strong> SahAI-Coop provides general guidance based on official government documents.
+      It does <strong>not</strong> constitute legal advice. For official matters, please consult a registered
+      legal counsel or the relevant government offices.
+    </p>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="site-footer">
+  © 2026 SahAI-Coop &nbsp;|&nbsp;
+  Built with ❤️ for Indian Farmers
+  &nbsp;|&nbsp; <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+</footer>
+
+
+<!-- ================================================================
+     INLINE JAVASCRIPT
+     ================================================================ -->
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------
+     1. AUTH GUARD — redirect if not logged in
+     ------------------------------------------------------------------ */
+  function guardAuth () {
+    if (window.API && !window.API.isLoggedIn()) {
+      window.location.replace('auth.html');
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     2. POPULATE USER INFO IN NAV
+     ------------------------------------------------------------------ */
+  function populateUser () {
+    const user = window.API ? window.API.getUser() : null;
+    if (!user) return;
+
+    const name    = user.name || user.email || 'User';
+    const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+    const els = {
+      name:        document.getElementById('user-name-display'),
+      avatar:      document.getElementById('user-avatar'),
+      mobileName:  document.getElementById('mobile-user-name'),
+      mobileAvatar:document.getElementById('mobile-user-avatar'),
+    };
+
+    if (els.name)         els.name.textContent        = name;
+    if (els.avatar)       els.avatar.textContent       = initials;
+    if (els.mobileName)   els.mobileName.textContent   = name;
+    if (els.mobileAvatar) els.mobileAvatar.textContent = initials;
+  }
+
+  /* ------------------------------------------------------------------
+     3. LOGOUT
+     ------------------------------------------------------------------ */
+  function setupLogout () {
+    const doLogout = () => {
+      if (window.API) window.API.clearSession();
+      window.location.replace('auth.html');
+    };
+    const btn1 = document.getElementById('logout-btn');
+    const btn2 = document.getElementById('mobile-logout-btn');
+    if (btn1) btn1.addEventListener('click', doLogout);
+    if (btn2) btn2.addEventListener('click', doLogout);
+  }
+
+  /* ------------------------------------------------------------------
+     4. SMOOTH SCROLL FOR "LEARN MORE"
+     ------------------------------------------------------------------ */
+  function setupSmoothScroll () {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          closeMobileNav();
+        }
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     5. TOPIC CARD NAVIGATION & HOME LANGUAGE SWITCHER
+     ------------------------------------------------------------------ */
+  const HOME_I18N = {
+    en: {
+      heroTitle: 'Multilingual Cooperative Governance &amp; <span class="highlight">Legal Assistance</span>',
+      heroSubtitle: 'Empowering farmers and cooperative members with AI-powered guidance on PMFBY, PACS services, government schemes, and cooperative law — in English, Hindi &amp; Marathi.',
+      ctaChat: 'Start Chatting',
+      ctaLearn: 'Learn More',
+      howTitle: 'How SahAI-Coop Works',
+      howSub: 'From your question to a verified answer in seconds.',
+      topicsTitle: 'What can I help you with?',
+      topicsSub: 'Click any topic to start a focused conversation with our AI assistant.',
+    },
+    hi: {
+      heroTitle: 'बहुभाषी सहकारी शासन और <span class="highlight">कानूनी सहायता</span>',
+      heroSubtitle: 'किसानों और सहकारी समिति के सदस्यों के लिए PMFBY फसल बीमा, पैक्स (PACS) सेवाओं, सरकारी योजनाओं और सहकारी कानून पर AI-आधारित मार्गदर्शन — अंग्रेजी, हिंदी और मराठी में।',
+      ctaChat: 'चैट शुरू करें',
+      ctaLearn: 'और जानें',
+      howTitle: 'SahAI-Coop कैसे काम करता है',
+      howSub: 'आपके प्रश्न से सेकंडों में सत्यापित उत्तर तक।',
+      topicsTitle: 'मैं आपकी क्या सहायता कर सकता हूँ?',
+      topicsSub: 'हमारे AI सहायक के साथ बातचीत शुरू करने के लिए किसी भी विषय पर क्लिक करें।',
+    },
+    mr: {
+      heroTitle: 'बहुभाषिक सहकारी प्रशासन आणि <span class="highlight">कायदेशीर सहाय्य</span>',
+      heroSubtitle: 'शेतकरी आणि सहकारी संस्थेच्या सभासदांसाठी PMFBY पीक विमा, पॅक्स (PACS) सेवा, शासकीय योजना आणि सहकारी कायद्यांबाबत AI मार्गदर्शन — इंग्रजी, हिंदी आणि मराठीमध्ये.',
+      ctaChat: 'चॅट सुरू करा',
+      ctaLearn: 'अधिक जाणून घ्या',
+      howTitle: 'SahAI-Coop कसे कार्य करते',
+      howSub: 'तुमच्या प्रश्नापासून काही सेकंदांत अधिकृत उत्तरापर्यंत.',
+      topicsTitle: 'मी तुम्हाला कशी मदत करू शकतो?',
+      topicsSub: 'आमच्या AI सहाय्यकाशी संवाद सुरू करण्यासाठी कोणत्याही विषयावर क्लिक करा.',
+    },
+  };
+
+  let activeHomeLang = localStorage.getItem('sahai_lang') || (window.API && window.API.getUser()?.preferred_language) || 'en';
+  if (!HOME_I18N[activeHomeLang]) activeHomeLang = 'en';
+
+  function applyHomeLanguage (lang, showNotice = false) {
+    if (!HOME_I18N[lang]) lang = 'en';
+    activeHomeLang = lang;
+    localStorage.setItem('sahai_lang', lang);
+
+    const t = HOME_I18N[lang];
+    const heroTitle = document.getElementById('hero-title');
+    const heroSub   = document.getElementById('hero-subtitle');
+    const ctaChat   = document.getElementById('cta-chat-text');
+    const ctaLearn  = document.getElementById('cta-learn-text');
+    const ctaLink   = document.getElementById('cta-chat');
+    if (heroTitle) heroTitle.innerHTML   = t.heroTitle;
+    if (heroSub)   heroSub.textContent   = t.heroSubtitle;
+    if (ctaChat)   ctaChat.textContent   = t.ctaChat;
+    if (ctaLearn)  ctaLearn.textContent  = t.ctaLearn;
+    if (ctaLink)   ctaLink.href          = 'chat.html?lang=' + encodeURIComponent(lang);
+
+    const featuresSec = document.querySelector('#features .section-title');
+    const featuresSub = document.querySelector('#features .section-subtitle');
+    const topicsSec   = document.querySelector('#topics .section-title');
+    const topicsSub   = document.querySelector('#topics .section-subtitle');
+    if (featuresSec) featuresSec.textContent = t.howTitle;
+    if (featuresSub) featuresSub.textContent = t.howSub;
+    if (topicsSec)   topicsSec.textContent   = t.topicsTitle;
+    if (topicsSub)   topicsSub.textContent   = t.topicsSub;
+
+    document.querySelectorAll('.lang-badge[data-lang]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    if (showNotice && window.API && typeof window.API.showToast === 'function') {
+      const name = lang === 'hi' ? 'हिंदी (Hindi)' : lang === 'mr' ? 'मराठी (Marathi)' : 'English';
+      window.API.showToast('Language set to ' + name, 'info', 2000);
+    }
+  }
+
+  function setupHomeLanguageSwitcher () {
+    document.querySelectorAll('.lang-badge[data-lang]').forEach(btn => {
+      btn.addEventListener('click', () => applyHomeLanguage(btn.dataset.lang, true));
+    });
+    applyHomeLanguage(activeHomeLang, false);
+  }
+
+  window.goToChat = function (topicKey) {
+    window.location.href = 'chat.html?topic=' + encodeURIComponent(topicKey) + '&lang=' + encodeURIComponent(activeHomeLang);
+  };
+
+  /* ------------------------------------------------------------------
+     6. MOBILE HAMBURGER
+     ------------------------------------------------------------------ */
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  window.closeMobileNav = function () {
+    if (hamburger) hamburger.classList.remove('open');
+    if (mobileNav) mobileNav.classList.remove('open');
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  };
+
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     7. PARTICLE CANVAS
+     ------------------------------------------------------------------ */
+  function initParticles () {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const particles = [];
+    const COUNT = 55;
+
+    function resize () {
+      canvas.width  = window.innerWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const palette = [
+      'rgba(76,175,80,',
+      'rgba(129,199,132,',
+      'rgba(46,125,50,',
+      'rgba(249,168,37,',
+      'rgba(38,166,154,',
+    ];
+
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x:    Math.random() * window.innerWidth,
+        y:    Math.random() * 800,
+        r:    Math.random() * 2.5 + 0.5,
+        dx:   (Math.random() - 0.5) * 0.35,
+        dy:   -(Math.random() * 0.4 + 0.1),
+        alpha: Math.random() * 0.5 + 0.2,
+        color: palette[Math.floor(Math.random() * palette.length)],
+      });
+    }
+
+    let animId;
+    function draw () {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + p.alpha + ')';
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        // Wrap around
+        if (p.y < -10)             p.y = canvas.height + 10;
+        if (p.x < -10)             p.x = canvas.width  + 10;
+        if (p.x > canvas.width+10) p.x = -10;
+
+        // Shimmer alpha
+        p.alpha += (Math.random() - 0.5) * 0.015;
+        p.alpha = Math.max(0.05, Math.min(0.75, p.alpha));
+      });
+      animId = requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Pause when hero is not visible
+    const heroObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (!animId) draw();
+      } else {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+    }, { threshold: 0 });
+    heroObs.observe(document.getElementById('hero'));
+  }
+
+  /* ------------------------------------------------------------------
+     8. INTERSECTION OBSERVER — section entrance
+     ------------------------------------------------------------------ */
+  function initReveal () {
+    const els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => obs.observe(el));
+  }
+
+  /* ------------------------------------------------------------------
+     9. DYNAMIC TOPICS FROM API (with static fallback)
+     ------------------------------------------------------------------ */
+  async function fetchTopics () {
+    if (!window.API) return;
+    try {
+      const topics = await window.API.getTopics();
+      if (!topics || !topics.length) return;
+
+      const colorMap = {
+        crop_insurance:   ['green',      '🌾', 'icon-green'],
+        documents:        ['blue-green', '📄', 'icon-blue-green'],
+        pacs:             ['teal',       '🏦', 'icon-teal'],
+        grievance:        ['amber',      '⚖️', 'icon-amber'],
+        cooperative_rules:['forest',     '📋', 'icon-forest'],
+        government_schemes:['gold',      '🏛️', 'icon-gold'],
+      };
+
+      const grid = document.getElementById('topics-grid');
+      if (!grid) return;
+
+      const html = topics.map(t => {
+        const key = (t.id || '').toLowerCase();
+        const [color, icon, iconClass] = colorMap[key] || ['green', '📌', 'icon-green'];
+        return `
+          <div class="topic-card" data-color="${color}" data-topic="${key}"
+               onclick="goToChat('${key}')">
+            <div class="topic-icon-wrap ${iconClass}">${t.icon || icon}</div>
+            <div class="topic-title">${t.title || t.name || t.id}</div>
+            <p class="topic-desc">${t.description || ''}</p>
+            <span class="topic-arrow">Ask about this →</span>
+          </div>`;
+      }).join('');
+
+      grid.innerHTML = html;
+    } catch (_) {
+      // Static fallback already in HTML — do nothing
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     10. INIT
+     ------------------------------------------------------------------ */
+  document.addEventListener('DOMContentLoaded', () => {
+    guardAuth();
+    populateUser();
+    setupLogout();
+    setupHomeLanguageSwitcher();
+    setupSmoothScroll();
+    initParticles();
+    initReveal();
+    fetchTopics();
+
+    // Wire data-modal buttons (if app.js is loaded)
+    document.querySelectorAll('[data-modal]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const type = btn.dataset.modal;
+        if (window.APP) {
+          if (type === 'disclaimer') window.APP.showDisclaimerModal();
+          else if (type === 'sources') window.APP.showSourcesModal();
+          else if (type === 'help')    window.APP.showHelpModal();
+        }
+      });
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
